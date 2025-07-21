@@ -23,7 +23,7 @@ namespace ClientLibrary.Services
                 await apiHelper.GetServiceResponse<ServiceResponse>(result);
         }
 
-        public async Task<LoginResponse> LoginUser(CreateUser user)
+        public async Task<LoginResponse> LoginUser(LoginUser user)
         {
             var client = await httpClient.GetPrivateClientAsync();
             var apiCall = new ApiCall
