@@ -55,7 +55,7 @@
     IEnumerable<GetProduct> Products = [];
     List<List<GetProduct>> ProductGroups = [];
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         Products = await productService.GetAllAsync();
         if (Products.Count() >0){
