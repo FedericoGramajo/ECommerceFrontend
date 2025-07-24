@@ -4,7 +4,7 @@ using ClientLibrary.Models.Product;
 
 namespace ClientLibrary.Services
 {
-    public class ProductService(HttpClientHelper httpClient, IApiCallHelper apiHelper) : IProductService
+    public class ProductService(IHttpClientHelper httpClient, IApiCallHelper apiHelper) : IProductService
     {
         public async Task<ServiceResponse> AddAsync(CreateProduct product)
         {

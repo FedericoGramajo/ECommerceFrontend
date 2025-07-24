@@ -35,7 +35,7 @@
         public static class Cookie
         {
             public const string Name = "token";
-            public const string Path = " /";
+            public const string Path = "/";
             public const int Days = 1;
         }
         public static class ApiClient

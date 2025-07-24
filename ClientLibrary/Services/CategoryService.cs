@@ -11,7 +11,7 @@ using static ClientLibrary.Helper.Constant;
 
 namespace ClientLibrary.Services
 {
-    public class CategoryService(HttpClientHelper httpClient, IApiCallHelper apiHelper) : ICategoryService
+    public class CategoryService(IHttpClientHelper httpClient, IApiCallHelper apiHelper) : ICategoryService
     {
         public async Task<ServiceResponse> AddAsync(CreateCategory category)
         {
