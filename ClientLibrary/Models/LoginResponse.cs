@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ClientLibrary.Models
 {
     public record LoginResponse
-        (bool Succes = false,
+        (bool Success = false,
             string Message = null!,
             string Token = null!,
             string RefreshToken = null!

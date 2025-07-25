@@ -33,7 +33,7 @@ namespace BlazorWasm.Authentication
         private async Task<LoginResponse> MakeApiCall(string refreshToken)
         {
             var result = await authenticationService.ReviveToken(refreshToken);
-            if (result.Succes)
+            if (result.Success)
             {
                 string cookieValue = tokenService.FormToken(result.Token, result.RefreshToken);
                 await tokenService.RemoveCookie(Constant.Cookie.Name);

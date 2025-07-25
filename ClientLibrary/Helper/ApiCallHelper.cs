@@ -1,11 +1,6 @@
 ﻿using ClientLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Text.Json;
 namespace ClientLibrary.Helper
 {
     public class ApiCallHelper : IApiCallHelper
@@ -39,7 +34,8 @@ namespace ClientLibrary.Helper
 
         public async Task<TResponse> GetServiceResponse<TResponse>(HttpResponseMessage message)
         {
-            var response = await message.Content.ReadFromJsonAsync<TResponse>()!;
+            var response = await message.Content.ReadFromJsonAsync<TResponse>(
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
             return response!;
         }
     }

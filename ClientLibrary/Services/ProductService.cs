@@ -55,7 +55,7 @@ namespace ClientLibrary.Services
             var client = httpClient.GetPublicClient();
             var apiCall = new ApiCall
             {
-                Route = Constant.Product.Get,
+                Route = Constant.Product.GetAll,
                 Type = Constant.ApiCallType.Get,
                 Client = client,
                 Model = null!,

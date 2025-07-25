@@ -11,6 +11,8 @@ namespace BlazorWasm.Authentication
         private ClaimsPrincipal _anonymous = new(new ClaimsIdentity());
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            try
+            {
             string jwt = await tokenService.GetJWTTokenAsync(Constant.Cookie.Name);
             if(string.IsNullOrEmpty(jwt))
                 return await Task.FromResult(new AuthenticationState(_anonymous));
@@ -21,6 +23,11 @@ namespace BlazorWasm.Authentication
 
             var claimPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
             return await Task.FromResult(new AuthenticationState(claimPrincipal));
+            }
+            catch
+            {
+                return await Task.FromResult(new AuthenticationState(_anonymous));
+            }
         }
         public void NotifyAuthenticationState()
         {

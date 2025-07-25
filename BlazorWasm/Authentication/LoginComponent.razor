@@ -8,7 +8,7 @@
                 @if (!string.IsNullOrEmpty(Message))
                 {
                     <div class="alert alert-@AlertType">@Message</div>
-                    
+
                 }
                 <div class="card p-4">
                     <div class="card-header">Kindly Login</div>
@@ -38,7 +38,7 @@
         Message = string.Empty;
         AlertType = string.Empty;
         var result = await authenticationService.LoginUser(Login);
-        if (!result.Succes)
+        if (!result.Success)
         {
             Message = result.Message;
             AlertType = "danger";
