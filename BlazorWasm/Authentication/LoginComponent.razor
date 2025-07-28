@@ -45,7 +45,7 @@
             return;
         }
         string cookieValue = tokenService.FormToken(result.Token, result.RefreshToken);
-        await tokenService.SetCookie(Constant.Cookie.Name, cookieValue, Constant.Cookie.Days, Constant.Cookie.Path);
+        await tokenService.SetCookie(Constant.Cookie.Name, cookieValue, Constant.Cookie.Seconds, Constant.Cookie.Path);
         (authStateProvider as CustomAuthStateProvider)!.NotifyAuthenticationState();
         NavManager.NavigateTo("/", true);
     }

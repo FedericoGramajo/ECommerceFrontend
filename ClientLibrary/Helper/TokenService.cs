@@ -35,9 +35,9 @@ namespace ClientLibrary.Helper
             await cookieService.RemoveAsync(key);
         }
 
-        public async Task SetCookie(string key, string value, long days, string path)
+        public async Task SetCookie(string key, string value, int seconds, string path)
         {
-                await cookieService.SetAsync(key, value, days, path);        
+            await cookieService.SetAsync(key, value, seconds, path); 
         }
     }
 }
