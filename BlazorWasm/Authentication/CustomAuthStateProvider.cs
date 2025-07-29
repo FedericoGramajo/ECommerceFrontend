@@ -21,7 +21,7 @@ namespace BlazorWasm.Authentication
             if(!claims.Any())
                 return await Task.FromResult(new AuthenticationState(_anonymous));
 
-            var claimPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
+            var claimPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, "jwtAuth"));
             return await Task.FromResult(new AuthenticationState(claimPrincipal));
             }
             catch

@@ -1,5 +1,6 @@
 ﻿using ClientLibrary.Helper;
 using ClientLibrary.Models;
+using ClientLibrary.Models.Category;
 using ClientLibrary.Models.Product;
 
 namespace ClientLibrary.Services
@@ -62,7 +63,11 @@ namespace ClientLibrary.Services
                 Id = null!
             };
             var result = await apiHelper.ApiCallTypeCall<Dummy>(apiCall);
-            return result == null ? [] : await apiHelper.GetServiceResponse<IEnumerable<GetProduct>>(result);
+
+            if (result.IsSuccessStatusCode)
+                return await apiHelper.GetServiceResponse<IEnumerable<GetProduct>>(result);
+            else
+                return [];
         }
 
         public async Task<GetProduct> GetByIdAsync(Guid id)
@@ -77,7 +82,11 @@ namespace ClientLibrary.Services
             };
             apiCall.ToString(id);
             var result = await apiHelper.ApiCallTypeCall<Dummy>(apiCall);
-            return result == null ? null! : await apiHelper.GetServiceResponse<GetProduct>(result);
+
+            if (result.IsSuccessStatusCode)
+                return await apiHelper.GetServiceResponse<GetProduct>(result);
+            else
+                return null!;
         }
 
       
