@@ -1,4 +1,6 @@
-﻿namespace ClientLibrary.Helper
+﻿using ClientLibrary.Models.Cart;
+
+namespace ClientLibrary.Helper
 {
     public static class Constant
     {
@@ -42,6 +44,17 @@
         public static class ApiClient
         {
             public const string Name = "Blazor-Client";
+        }
+        public static class Payment
+        {
+            public const string GetAll = "payment/methods";
+        }
+
+        public static class Cart
+        {
+            public const string Checkout = "cart/checkout";
+            public const string SaveCart = "cart/save-checkout";
+            public const string Name = "my-cart";
         }
     }
 }
