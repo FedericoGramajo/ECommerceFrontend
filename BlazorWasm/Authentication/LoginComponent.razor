@@ -1,4 +1,5 @@
 ﻿@page "/authentication/login"
+@page "/authentication/login/{route}"
 
 <div class="container-fluid m-5 p-5">
     <div class="row">
@@ -29,6 +30,7 @@
     </div>
 </div>
 @code {
+    [Parameter] public string Route { get; set; } = null!;
     string AlertType = string.Empty;
     string Message = string.Empty;
 
@@ -47,6 +49,6 @@
         string cookieValue = tokenService.FormToken(result.Token, result.RefreshToken);
         await tokenService.SetCookie(Constant.Cookie.Name, cookieValue, Constant.Cookie.Seconds, Constant.Cookie.Path);
         (authStateProvider as CustomAuthStateProvider)!.NotifyAuthenticationState();
-        NavManager.NavigateTo("/", true);
+        NavManager.NavigateTo(Route == null? "/" : Route, true);
     }
 }

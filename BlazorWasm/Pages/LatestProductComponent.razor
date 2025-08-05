@@ -1,4 +1,5 @@
-﻿<div class="fashion_section">
+﻿@implements IAsyncDisposable
+<div class="fashion_section">
     <div id="main_slider" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             @if (ProductGroups.Any())
@@ -23,7 +24,7 @@
                                                 <p class="price_text">Price  <span style="color: #262626;">@product.Price</span></p>
                                                 <div class="tshirt_img"><img src=@product.Base64Image></div>
                                                 <div class="btn_main">
-                                                    <div class="buy_bt"><a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a></div>
+                                                    <div class="buy_bt text-danger" onclick="()=>AddItemToCart(product.Id)"><a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a></div>
                                                     <div class="seemore_bt"><a href="#">See More</a></div>
                                                 </div>
                                             </div>
@@ -47,13 +48,20 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         }
-        
+
     </div>
 </div>
 
+<NetcodeHubToast @ref="ToastComponent"
+Position="@ToastPosition.Bottom()"
+IconClass="fa fa-check"
+Persist="true"
+Duration="4000" />
 @code{
+    NetcodeHubToast? ToastComponent;
     IEnumerable<GetProduct> Products = [];
     List<List<GetProduct>> ProductGroups = [];
+    List<ProcessCart> MyCarts = [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,6 +72,23 @@
                                     .GroupBy(x => x.index / 4)
                                     .Select(group => group.Select(x => x.product).ToList())
                                     .ToList();
+        }
+    }
+    async Task AddItemToCart(Guid productId)
+    {
+        var getCart = MyCarts.FirstOrDefault(x => x.ProductId == productId);
+        if (getCart == null)
+            MyCarts.Add(new ProcessCart { ProductId = productId, Quantity = 1 });
+        else
+            await ToastComponent!.ShowInfoToast("Cart", "Item already added in cart");
+
+
+    }
+    public async ValueTask DisposeAsync()
+    {
+        if (MyCarts.Any())
+        {
+            await browserCookieStorageService.SetAsync(Constant.Cart.Name, JsonSerializer.Serialize(MyCarts), 604800, "/");
         }
     }
 }
