@@ -5,10 +5,10 @@
             @if (ProductGroups.Any())
             {
                 int sn = 1;
-                foreach (var group in ProductGroups)
+                @foreach (var group in ProductGroups)
                 {
 
-                    <div class="carousel-item @(sn == 1? "activate":null)">
+                    <div class="carousel-item @(sn == 1?"active":null)">
                         <div class="container-fluid">
                             <h1 class="fashion_taital text-light fw-bold">Latest Product</h1>
                             <div class="fashion_section_2">
@@ -24,7 +24,7 @@
                                                 <p class="price_text">Price  <span style="color: #262626;">@product.Price</span></p>
                                                 <div class="tshirt_img"><img src=@product.Base64Image></div>
                                                 <div class="btn_main">
-                                                    <div class="buy_bt text-danger" onclick="()=>AddItemToCart(product.Id)"><a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a></div>
+                                                    <div class="buy_bt text-danger" @onclick="()=>AddItemToCart(product.Id)"><a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a></div>
                                                     <div class="seemore_bt"><a href="#">See More</a></div>
                                                 </div>
                                             </div>
