@@ -26,7 +26,7 @@
                                     {
                                         Guid productId = item.Id;
                                         <tr>
-                                            <td style="width:150px">@item.Base64Image</td>
+                                            <td style="width:150px">@item.Image</td>
                                             <td style="width:250px">@item.Name</td>
                                             <td style="width:250px">$@item.Price</td>
                                             <td>
@@ -99,20 +99,7 @@
     </div>
 </div>
 
-<style>
-    .modalDialog{
-        min-width:3000px;
-        max-width: 500px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1050;
-    }
-</style>
+
 
 <NetcodeHubToast @ref="ToastComponent" 
     Position="@ToastPosition.Bottom()"
@@ -137,7 +124,7 @@
             return;
 
         MyCarts = JsonSerializer.Deserialize<List<ProcessCart>>(cartString)!;
-        if (MyCarts.Any()) return;
+        if (!MyCarts.Any()) return;
         GetCart();
     }
     void GetCart()

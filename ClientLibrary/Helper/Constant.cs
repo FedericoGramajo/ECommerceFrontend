@@ -55,6 +55,11 @@ namespace ClientLibrary.Helper
             public const string Checkout = "cart/checkout";
             public const string SaveCart = "cart/save-checkout";
             public const string Name = "my-cart";
+            public const string GetAchieve = "cart/get-achieves";
+        }
+        public static class Administration
+        {
+            public const string AdminRole = "Admin";
         }
     }
 }

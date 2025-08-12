@@ -1,6 +1,7 @@
 ﻿using ClientLibrary.Helper;
 using ClientLibrary.Models;
 using ClientLibrary.Models.Cart;
+using ClientLibrary.Models.Category;
 
 namespace ClientLibrary.Services
 {
@@ -8,12 +9,12 @@ namespace ClientLibrary.Services
     {
         public async Task<ServiceResponse> Checkout(Checkout checkout)
         {
-            var priuvateClient = await httpClient.GetPrivateClientAsync();
+            var privateClient = await httpClient.GetPrivateClientAsync();
             var apiCallModel = new ApiCall
             {
                 Route = Constant.Cart.Checkout,
                 Type = Constant.ApiCallType.Post,
-                Client = priuvateClient,
+                Client = privateClient,
                 Id= null!,
                 Model = checkout
             };
@@ -24,18 +25,37 @@ namespace ClientLibrary.Services
                 return await apiHelper.GetServiceResponse<ServiceResponse>(result);
         }
 
+        public async Task<IEnumerable<GetAchieve>> GetAchieves()
+        {
+            var privateClient = await httpClient.GetPrivateClientAsync();
+            var apiCall = new ApiCall
+            {
+                Route = Constant.Cart.GetAchieve,
+                Type = Constant.ApiCallType.Get,
+                Client = privateClient,
+                Model = null!,
+                Id = null!
+            };
+            var result = await apiHelper.ApiCallTypeCall<Dummy>(apiCall);
+
+            if (result.IsSuccessStatusCode)
+                return await apiHelper.GetServiceResponse<IEnumerable<GetAchieve>>(result);
+            else
+                return [];
+        }
+
         public async Task<ServiceResponse> SaveCheckoutHistory(IEnumerable<CreateAchieve> achieves)
         {
-            var priuvateClient = await httpClient.GetPrivateClientAsync();
+            var privateClient = await httpClient.GetPrivateClientAsync();
             var apiCallModel = new ApiCall
             {
                 Route = Constant.Cart.SaveCart,
                 Type = Constant.ApiCallType.Post,
-                Client = priuvateClient,
+                Client = privateClient,
                 Id = null!,
                 Model = achieves
             };
-            var result = await apiHelper.ApiCallTypeCall<IEnumerable<Checkout>>(apiCallModel);
+            var result = await apiHelper.ApiCallTypeCall<IEnumerable<CreateAchieve>>(apiCallModel);
             if (result == null)
                 return apiHelper.ConnectionError();
             else
