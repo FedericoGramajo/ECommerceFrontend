@@ -11,5 +11,6 @@ namespace ClientLibrary.Models.Product
     {
         [Required]
         public Guid Id { get; set; }
+        //ejemplo para commit
     }
 }
